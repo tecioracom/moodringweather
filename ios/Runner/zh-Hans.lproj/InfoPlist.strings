@@ -1,0 +1,3 @@
+/* 位置用途说明 */
+"NSLocationWhenInUseUsageDescription" = "Mood-Ring Weather 使用你的大致位置来显示当地天气，不会保存位置记录。";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Mood-Ring Weather 使用你的大致位置来显示当地天气，不会保存位置记录。";

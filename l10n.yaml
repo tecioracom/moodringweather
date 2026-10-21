@@ -1,0 +1,9 @@
+# Flutter gen-l10n 設定 (spec.md §21 国際化対応)
+# `flutter gen-l10n` で lib/l10n/*.arb から AppLocalizations を生成する。
+arb-dir: lib/l10n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+nullable-getter: false
+# 翻訳漏れキーがあるとビルドを失敗させる(リリース品質ガード)。
+untranslated-messages-file: lib/l10n/untranslated.txt

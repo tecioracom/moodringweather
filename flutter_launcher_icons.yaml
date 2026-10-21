@@ -1,0 +1,15 @@
+# ランチャーアイコン生成設定 (`dart run flutter_launcher_icons` で再生成)
+#
+# 背景: 旧アイコンはリング外径が約78%あり、ランチャーの角丸/円マスクで
+# リングが切れていた。ソース画像でリングを縮小して再生成する。
+#   - iOS:     assets/icon/app_icon_ios_1024.png  (リング外径 ≈74%、全面オペーク・ネイビー)
+#   - Android: アダプティブ。前景 = リングのみ (外径 ≈61% = 108dp 中の 66dp セーフゾーン内)
+#              背景 = 単色ネイビー #0E1230
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon_ios_1024.png"
+  remove_alpha_ios: true
+  min_sdk_android: 21
+  adaptive_icon_background: "#0E1230"
+  adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"

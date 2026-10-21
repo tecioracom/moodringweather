@@ -1,0 +1,554 @@
+[
+  {
+    "id": "tokyo",
+    "name": "Tokyo",
+    "country": "Japan",
+    "latitude": 35.68,
+    "longitude": 139.69,
+    "emoji": "🇯🇵"
+  },
+  {
+    "id": "seoul",
+    "name": "Seoul",
+    "country": "South Korea",
+    "latitude": 37.57,
+    "longitude": 126.98,
+    "emoji": "🇰🇷"
+  },
+  {
+    "id": "beijing",
+    "name": "Beijing",
+    "country": "China",
+    "latitude": 39.9,
+    "longitude": 116.41,
+    "emoji": "🇨🇳"
+  },
+  {
+    "id": "shanghai",
+    "name": "Shanghai",
+    "country": "China",
+    "latitude": 31.23,
+    "longitude": 121.47,
+    "emoji": "🇨🇳"
+  },
+  {
+    "id": "hongkong",
+    "name": "Hong Kong",
+    "country": "Hong Kong",
+    "latitude": 22.32,
+    "longitude": 114.17,
+    "emoji": "🇭🇰"
+  },
+  {
+    "id": "taipei",
+    "name": "Taipei",
+    "country": "Taiwan",
+    "latitude": 25.03,
+    "longitude": 121.57,
+    "emoji": "🇹🇼"
+  },
+  {
+    "id": "singapore",
+    "name": "Singapore",
+    "country": "Singapore",
+    "latitude": 1.35,
+    "longitude": 103.82,
+    "emoji": "🇸🇬"
+  },
+  {
+    "id": "bangkok",
+    "name": "Bangkok",
+    "country": "Thailand",
+    "latitude": 13.76,
+    "longitude": 100.5,
+    "emoji": "🇹🇭"
+  },
+  {
+    "id": "hanoi",
+    "name": "Hanoi",
+    "country": "Vietnam",
+    "latitude": 21.03,
+    "longitude": 105.85,
+    "emoji": "🇻🇳"
+  },
+  {
+    "id": "manila",
+    "name": "Manila",
+    "country": "Philippines",
+    "latitude": 14.6,
+    "longitude": 120.98,
+    "emoji": "🇵🇭"
+  },
+  {
+    "id": "jakarta",
+    "name": "Jakarta",
+    "country": "Indonesia",
+    "latitude": -6.21,
+    "longitude": 106.85,
+    "emoji": "🇮🇩"
+  },
+  {
+    "id": "kualalumpur",
+    "name": "Kuala Lumpur",
+    "country": "Malaysia",
+    "latitude": 3.14,
+    "longitude": 101.69,
+    "emoji": "🇲🇾"
+  },
+  {
+    "id": "mumbai",
+    "name": "Mumbai",
+    "country": "India",
+    "latitude": 19.08,
+    "longitude": 72.88,
+    "emoji": "🇮🇳"
+  },
+  {
+    "id": "delhi",
+    "name": "New Delhi",
+    "country": "India",
+    "latitude": 28.61,
+    "longitude": 77.21,
+    "emoji": "🇮🇳"
+  },
+  {
+    "id": "dubai",
+    "name": "Dubai",
+    "country": "United Arab Emirates",
+    "latitude": 25.2,
+    "longitude": 55.27,
+    "emoji": "🇦🇪"
+  },
+  {
+    "id": "istanbul",
+    "name": "Istanbul",
+    "country": "Turkey",
+    "latitude": 41.01,
+    "longitude": 28.98,
+    "emoji": "🇹🇷"
+  },
+  {
+    "id": "cairo",
+    "name": "Cairo",
+    "country": "Egypt",
+    "latitude": 30.04,
+    "longitude": 31.24,
+    "emoji": "🇪🇬"
+  },
+  {
+    "id": "nairobi",
+    "name": "Nairobi",
+    "country": "Kenya",
+    "latitude": -1.29,
+    "longitude": 36.82,
+    "emoji": "🇰🇪"
+  },
+  {
+    "id": "lagos",
+    "name": "Lagos",
+    "country": "Nigeria",
+    "latitude": 6.52,
+    "longitude": 3.38,
+    "emoji": "🇳🇬"
+  },
+  {
+    "id": "accra",
+    "name": "Accra",
+    "country": "Ghana",
+    "latitude": 5.6,
+    "longitude": -0.19,
+    "emoji": "🇬🇭"
+  },
+  {
+    "id": "casablanca",
+    "name": "Casablanca",
+    "country": "Morocco",
+    "latitude": 33.57,
+    "longitude": -7.59,
+    "emoji": "🇲🇦"
+  },
+  {
+    "id": "capetown",
+    "name": "Cape Town",
+    "country": "South Africa",
+    "latitude": -33.92,
+    "longitude": 18.42,
+    "emoji": "🇿🇦"
+  },
+  {
+    "id": "johannesburg",
+    "name": "Johannesburg",
+    "country": "South Africa",
+    "latitude": -26.2,
+    "longitude": 28.05,
+    "emoji": "🇿🇦"
+  },
+  {
+    "id": "addisababa",
+    "name": "Addis Ababa",
+    "country": "Ethiopia",
+    "latitude": 9.01,
+    "longitude": 38.75,
+    "emoji": "🇪🇹"
+  },
+  {
+    "id": "moscow",
+    "name": "Moscow",
+    "country": "Russia",
+    "latitude": 55.76,
+    "longitude": 37.62,
+    "emoji": "🇷🇺"
+  },
+  {
+    "id": "helsinki",
+    "name": "Helsinki",
+    "country": "Finland",
+    "latitude": 60.17,
+    "longitude": 24.94,
+    "emoji": "🇫🇮"
+  },
+  {
+    "id": "stockholm",
+    "name": "Stockholm",
+    "country": "Sweden",
+    "latitude": 59.33,
+    "longitude": 18.07,
+    "emoji": "🇸🇪"
+  },
+  {
+    "id": "oslo",
+    "name": "Oslo",
+    "country": "Norway",
+    "latitude": 59.91,
+    "longitude": 10.75,
+    "emoji": "🇳🇴"
+  },
+  {
+    "id": "copenhagen",
+    "name": "Copenhagen",
+    "country": "Denmark",
+    "latitude": 55.68,
+    "longitude": 12.57,
+    "emoji": "🇩🇰"
+  },
+  {
+    "id": "reykjavik",
+    "name": "Reykjavik",
+    "country": "Iceland",
+    "latitude": 64.15,
+    "longitude": -21.94,
+    "emoji": "🇮🇸"
+  },
+  {
+    "id": "london",
+    "name": "London",
+    "country": "United Kingdom",
+    "latitude": 51.51,
+    "longitude": -0.13,
+    "emoji": "🇬🇧"
+  },
+  {
+    "id": "dublin",
+    "name": "Dublin",
+    "country": "Ireland",
+    "latitude": 53.35,
+    "longitude": -6.26,
+    "emoji": "🇮🇪"
+  },
+  {
+    "id": "paris",
+    "name": "Paris",
+    "country": "France",
+    "latitude": 48.86,
+    "longitude": 2.35,
+    "emoji": "🇫🇷"
+  },
+  {
+    "id": "amsterdam",
+    "name": "Amsterdam",
+    "country": "Netherlands",
+    "latitude": 52.37,
+    "longitude": 4.9,
+    "emoji": "🇳🇱"
+  },
+  {
+    "id": "berlin",
+    "name": "Berlin",
+    "country": "Germany",
+    "latitude": 52.52,
+    "longitude": 13.41,
+    "emoji": "🇩🇪"
+  },
+  {
+    "id": "zurich",
+    "name": "Zurich",
+    "country": "Switzerland",
+    "latitude": 47.38,
+    "longitude": 8.54,
+    "emoji": "🇨🇭"
+  },
+  {
+    "id": "vienna",
+    "name": "Vienna",
+    "country": "Austria",
+    "latitude": 48.21,
+    "longitude": 16.37,
+    "emoji": "🇦🇹"
+  },
+  {
+    "id": "prague",
+    "name": "Prague",
+    "country": "Czechia",
+    "latitude": 50.08,
+    "longitude": 14.44,
+    "emoji": "🇨🇿"
+  },
+  {
+    "id": "warsaw",
+    "name": "Warsaw",
+    "country": "Poland",
+    "latitude": 52.23,
+    "longitude": 21.01,
+    "emoji": "🇵🇱"
+  },
+  {
+    "id": "rome",
+    "name": "Rome",
+    "country": "Italy",
+    "latitude": 41.9,
+    "longitude": 12.5,
+    "emoji": "🇮🇹"
+  },
+  {
+    "id": "madrid",
+    "name": "Madrid",
+    "country": "Spain",
+    "latitude": 40.42,
+    "longitude": -3.7,
+    "emoji": "🇪🇸"
+  },
+  {
+    "id": "barcelona",
+    "name": "Barcelona",
+    "country": "Spain",
+    "latitude": 41.39,
+    "longitude": 2.17,
+    "emoji": "🇪🇸"
+  },
+  {
+    "id": "lisbon",
+    "name": "Lisbon",
+    "country": "Portugal",
+    "latitude": 38.72,
+    "longitude": -9.14,
+    "emoji": "🇵🇹"
+  },
+  {
+    "id": "athens",
+    "name": "Athens",
+    "country": "Greece",
+    "latitude": 37.98,
+    "longitude": 23.73,
+    "emoji": "🇬🇷"
+  },
+  {
+    "id": "newyork",
+    "name": "New York",
+    "country": "United States",
+    "latitude": 40.71,
+    "longitude": -74.01,
+    "emoji": "🇺🇸"
+  },
+  {
+    "id": "toronto",
+    "name": "Toronto",
+    "country": "Canada",
+    "latitude": 43.65,
+    "longitude": -79.38,
+    "emoji": "🇨🇦"
+  },
+  {
+    "id": "vancouver",
+    "name": "Vancouver",
+    "country": "Canada",
+    "latitude": 49.28,
+    "longitude": -123.12,
+    "emoji": "🇨🇦"
+  },
+  {
+    "id": "chicago",
+    "name": "Chicago",
+    "country": "United States",
+    "latitude": 41.88,
+    "longitude": -87.63,
+    "emoji": "🇺🇸"
+  },
+  {
+    "id": "miami",
+    "name": "Miami",
+    "country": "United States",
+    "latitude": 25.76,
+    "longitude": -80.19,
+    "emoji": "🇺🇸"
+  },
+  {
+    "id": "losangeles",
+    "name": "Los Angeles",
+    "country": "United States",
+    "latitude": 34.05,
+    "longitude": -118.24,
+    "emoji": "🇺🇸"
+  },
+  {
+    "id": "sanfrancisco",
+    "name": "San Francisco",
+    "country": "United States",
+    "latitude": 37.77,
+    "longitude": -122.42,
+    "emoji": "🇺🇸"
+  },
+  {
+    "id": "seattle",
+    "name": "Seattle",
+    "country": "United States",
+    "latitude": 47.61,
+    "longitude": -122.33,
+    "emoji": "🇺🇸"
+  },
+  {
+    "id": "denver",
+    "name": "Denver",
+    "country": "United States",
+    "latitude": 39.74,
+    "longitude": -104.99,
+    "emoji": "🇺🇸"
+  },
+  {
+    "id": "honolulu",
+    "name": "Honolulu",
+    "country": "United States",
+    "latitude": 21.31,
+    "longitude": -157.86,
+    "emoji": "🇺🇸"
+  },
+  {
+    "id": "anchorage",
+    "name": "Anchorage",
+    "country": "United States",
+    "latitude": 61.22,
+    "longitude": -149.9,
+    "emoji": "🇺🇸"
+  },
+  {
+    "id": "mexicocity",
+    "name": "Mexico City",
+    "country": "Mexico",
+    "latitude": 19.43,
+    "longitude": -99.13,
+    "emoji": "🇲🇽"
+  },
+  {
+    "id": "havana",
+    "name": "Havana",
+    "country": "Cuba",
+    "latitude": 23.11,
+    "longitude": -82.37,
+    "emoji": "🇨🇺"
+  },
+  {
+    "id": "bogota",
+    "name": "Bogotá",
+    "country": "Colombia",
+    "latitude": 4.71,
+    "longitude": -74.07,
+    "emoji": "🇨🇴"
+  },
+  {
+    "id": "lima",
+    "name": "Lima",
+    "country": "Peru",
+    "latitude": -12.05,
+    "longitude": -77.04,
+    "emoji": "🇵🇪"
+  },
+  {
+    "id": "quito",
+    "name": "Quito",
+    "country": "Ecuador",
+    "latitude": -0.18,
+    "longitude": -78.47,
+    "emoji": "🇪🇨"
+  },
+  {
+    "id": "saopaulo",
+    "name": "São Paulo",
+    "country": "Brazil",
+    "latitude": -23.55,
+    "longitude": -46.63,
+    "emoji": "🇧🇷"
+  },
+  {
+    "id": "riodejaneiro",
+    "name": "Rio de Janeiro",
+    "country": "Brazil",
+    "latitude": -22.91,
+    "longitude": -43.17,
+    "emoji": "🇧🇷"
+  },
+  {
+    "id": "buenosaires",
+    "name": "Buenos Aires",
+    "country": "Argentina",
+    "latitude": -34.6,
+    "longitude": -58.38,
+    "emoji": "🇦🇷"
+  },
+  {
+    "id": "santiago",
+    "name": "Santiago",
+    "country": "Chile",
+    "latitude": -33.45,
+    "longitude": -70.67,
+    "emoji": "🇨🇱"
+  },
+  {
+    "id": "sydney",
+    "name": "Sydney",
+    "country": "Australia",
+    "latitude": -33.87,
+    "longitude": 151.21,
+    "emoji": "🇦🇺"
+  },
+  {
+    "id": "melbourne",
+    "name": "Melbourne",
+    "country": "Australia",
+    "latitude": -37.81,
+    "longitude": 144.96,
+    "emoji": "🇦🇺"
+  },
+  {
+    "id": "perth",
+    "name": "Perth",
+    "country": "Australia",
+    "latitude": -31.95,
+    "longitude": 115.86,
+    "emoji": "🇦🇺"
+  },
+  {
+    "id": "auckland",
+    "name": "Auckland",
+    "country": "New Zealand",
+    "latitude": -36.85,
+    "longitude": 174.76,
+    "emoji": "🇳🇿"
+  },
+  {
+    "id": "wellington",
+    "name": "Wellington",
+    "country": "New Zealand",
+    "latitude": -41.29,
+    "longitude": 174.78,
+    "emoji": "🇳🇿"
+  }
+]

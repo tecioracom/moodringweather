@@ -1,0 +1,71 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mood_ring_weather/data/models/pollen_level.dart';
+import 'package:mood_ring_weather/data/models/weather_snapshot.dart';
+import 'package:mood_ring_weather/domain/safety/advanced_safety.dart';
+
+WeatherSnapshot snapshot({
+  DateTime? at,
+  double temp = 25,
+  double humid = 50,
+}) =>
+    WeatherSnapshot(
+      timestamp: at ?? DateTime(2026, 7, 15, 12),
+      latitude: 35.66,
+      longitude: 139.75,
+      temperature: temp,
+      apparentTemperature: temp,
+      humidity: humid,
+      pressure: 1013,
+      windSpeed: 3,
+      uvIndex: 5,
+      aqi: 40,
+      pollen: PollenLevel.low,
+      condition: 'sunny',
+    );
+
+void main() {
+  group('AdvancedSafety.correctSnapshot', () {
+    test('標高 1000m で気温が -6°C 補正される', () {
+      const safety = AdvancedSafety(elevationMeters: 1000);
+      final s = safety.correctSnapshot(snapshot(temp: 25));
+      expect(s.temperature, closeTo(19, 0.01));
+    });
+
+    test('都市ヒート +1°C が加算される', () {
+      const safety = AdvancedSafety(urbanHeatBoostC: 1);
+      final s = safety.correctSnapshot(snapshot(temp: 25));
+      expect(s.temperature, 26);
+    });
+  });
+
+  group('AdvancedSafety.evaluateWithLeadTime', () {
+    test('リードタイム内に閾値越えがあれば通知', () {
+      const safety = AdvancedSafety(leadTimeMinutes: 60);
+      final now = DateTime(2026, 7, 15, 12);
+      final series = [
+        snapshot(at: now.add(const Duration(minutes: 15)), temp: 28, humid: 50),
+        snapshot(at: now.add(const Duration(minutes: 45)), temp: 36, humid: 70),
+      ];
+      final alerts = safety.evaluateWithLeadTime(
+        forecastSeries: series,
+        now: now,
+        solarRadiationWm2: 800,
+      );
+      expect(alerts, isNotEmpty);
+    });
+
+    test('リードタイム外の越境は通知しない', () {
+      const safety = AdvancedSafety(leadTimeMinutes: 30);
+      final now = DateTime(2026, 7, 15, 12);
+      final series = [
+        snapshot(at: now.add(const Duration(minutes: 90)), temp: 36, humid: 70),
+      ];
+      final alerts = safety.evaluateWithLeadTime(
+        forecastSeries: series,
+        now: now,
+        solarRadiationWm2: 800,
+      );
+      expect(alerts, isEmpty);
+    });
+  });
+}

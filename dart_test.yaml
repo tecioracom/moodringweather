@@ -1,0 +1,7 @@
+# flutter test の設定。
+tags:
+  golden:
+    description: >-
+      保存画像との画素比較 (test/golden)。基準画像は macOS で生成しており、
+      OS とフォントの描画差で Linux の CI では一致しないため、CI では除外して
+      macOS の手元でだけ実行する: flutter test --tags golden

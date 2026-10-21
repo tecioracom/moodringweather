@@ -1,0 +1,15 @@
+# Mood-Ring Weather — Android アップロード鍵設定の雛形
+#
+# 使い方:
+#   1. このファイルを android/key.properties にコピーする
+#   2. プレースホルダを実際の値に置き換える
+#   3. key.properties と *.jks は絶対に Git にコミットしない (.gitignore 済み)
+#      実値は組織のシークレットストア (1Password 等) で管理する
+#
+# 鍵の生成手順・signingConfig の組み込みは docs/release-setup.md §2, §4 を参照。
+
+storePassword=REPLACE_WITH_KEYSTORE_PASSWORD
+keyPassword=REPLACE_WITH_KEY_PASSWORD
+keyAlias=upload
+# upload-keystore.jks への絶対パス、または android/app からの相対パス
+storeFile=REPLACE_WITH_PATH_TO_UPLOAD_KEYSTORE_JKS

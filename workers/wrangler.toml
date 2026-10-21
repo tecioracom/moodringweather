@@ -1,0 +1,47 @@
+name = "mrw-emergency-notifier"
+main = "src/index.ts"
+compatibility_date = "2026-05-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Cron 専用の Worker。HTTP 公開は不要なため workers.dev サブドメインを作らない。
+# /health と /webhooks/revenuecat を外部公開する必要が生じたら、その時点で
+# workers_dev = true か routes を設定する(課金開始時の RevenueCat Webhook で必要)。
+workers_dev = false
+
+# 永久無料ポリシー(spec.md §12.2.1)対象の緊急通知 3 種を判定する Cron Workers。
+# 発火しきい値の正本: docs/mri-spec.md §5.3(2026-06-11 改訂)
+# - 熱中症警戒  : 予報日最高 WBGT >= 33(警戒)/ >= 35(特別警戒・Time-Sensitive)
+# - 暴風        : 平均風速 >= 20 m/s(severe)/ >= 30 m/s(danger)
+# - 大雪・積雪  : 降雪 >= 3 cm/h(severe)/ >= 5 cm/h(danger)
+#
+# Cron スケジュール(mri-spec §5.3.2。spec.md §12.4 / §12.10):
+#   - 毎時 0/10/20/30/40/50 分 = 5〜10 分間隔の汎用判定(暴風・大雪)
+#   - 当日 5:00 JST / 前日 17:00 JST = 熱中症 予報判定(>= 33。公式警戒アラートの発表時刻と同一)
+#   - 前日 14:00 JST = 熱中症 特別警戒判定(>= 35 のみ。公式特別警戒アラートの発表時刻と同一)
+#     ※ Cloudflare は UTC で記述。JST 5:00 -> UTC 20:00 / 17:00 -> UTC 08:00 / 14:00 -> UTC 05:00
+[triggers]
+crons = [
+  "*/10 * * * *",   # 10 分毎: 暴風・大雪モニタ(熱中症はこのトリガーでは発火しない)
+  "0 20 * * *",     # 毎日 UTC 20:00 = JST 翌 05:00 — 熱中症 当日判定(>= 33)
+  "0 8 * * *",      # 毎日 UTC 08:00 = JST 17:00 — 熱中症 前日判定(>= 33)
+  "0 5 * * *"       # 毎日 UTC 05:00 = JST 14:00 — 熱中症 特別警戒 前日判定(>= 35)
+]
+
+[vars]
+# Open-Meteo は無認証(spec.md §3.1)。FCM のみ secret として wrangler secret put で投入する。
+OPEN_METEO_BASE = "https://api.open-meteo.com/v1/forecast"
+# パーソナル通知(AQI / 花粉)用 Air Quality API(spec.md §12.2.3)。
+# 別ホスト・無認証。
+OPEN_METEO_AIRQ_BASE = "https://air-quality-api.open-meteo.com/v1/air-quality"
+# secret (`wrangler secret put`。docs/fcm-activation-plan-v1.3.0.md S5):
+#   wrangler secret put FIRESTORE_PROJECT_ID    # Firebase プロジェクト ID (Firestore / FCM 共用)
+#   wrangler secret put FIREBASE_SA_JSON        # サービスアカウント JSON。Firestore 読み書き + FCM 送信の
+#                                               # OAuth トークン交換に共用 (roles: datastore.user +
+#                                               # cloudmessaging.messages.create / firebasemessaging.messages.create)
+#   wrangler secret put RC_WEBHOOK_AUTH_TOKEN   # 課金 Webhook (/webhooks/revenuecat) 用。RC ダッシュボードの
+#                                               # Authorization と一致させる 32byte ランダム
+# Legacy FCM Server Key は廃止済みのため使わない。
+
+[[kv_namespaces]]
+binding = "ALERT_DEDUPE"           # 同種類アラートのレート制限(spec.md §12.3 重複抑制)
+id = "00831949b4ee4bfda44e52f5677aebf9"

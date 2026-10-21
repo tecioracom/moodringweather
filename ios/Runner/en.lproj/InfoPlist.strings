@@ -1,0 +1,3 @@
+/* Location purpose strings */
+"NSLocationWhenInUseUsageDescription" = "Mood-Ring Weather uses your approximate location to show the weather where you are. Location history is not stored.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Mood-Ring Weather uses your approximate location to show the weather where you are. Location history is not stored.";

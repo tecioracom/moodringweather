@@ -1,0 +1,123 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs / temp
+*.log
+*.tmp
+
+# Office lockfiles
+~$*
+
+# Local env
+.env
+.env.local
+
+# Android 署名 (実鍵・パスワードは絶対にコミットしない / 雛形は android/key.properties.example)
+android/key.properties
+*.jks
+*.keystore
+
+# iOS App Store Connect API キー (配布署名・アップロード用の秘密鍵。絶対にコミットしない)
+*.p8
+AuthKey_*.p8
+
+# 実機キャプチャ (テスト時の端末スクショ。コミットしない)
+device-captures/
+
+# ストア入稿画像 (Figma から書き出した PNG。再生成可能・サイズ大のためリポに入れない。
+# 正本は Figma。入稿はローカルの store-assets/ から行う)
+store-assets/
+
+# プライバシーポリシーの Vercel デプロイ用フォルダ (docs/privacy-policy.html のコピー。
+# 正本は docs/privacy-policy.html。Vercel へはこのフォルダからデプロイ)
+legal-deploy/
+
+# Node.js / Cloudflare Workers (依存は npm ci で再生成。node_modules はコミットしない)
+node_modules/
+**/node_modules/
+workers/.wrangler/
+.vite/
+**/.vite/
+*.tsbuildinfo
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+.packages
+# gen-l10n の生成物 (pubspec.yaml の generate:true で pub get / build 時に自動再生成)
+lib/l10n/app_localizations*.dart
+lib/l10n/untranslated.txt
+
+# Google Play service account key (secret)
+academic-atlas-*.json
+play-publisher*.json
+*-service-account*.json
+
+# CODEX の作業用スナップショット (Figma 状態の機械ダンプ。差分として無意味かつ 9MB 級)
+# mrw-addendum-work/ は報告書が画像を参照しているため追跡する
+mrw-unify-work/
+mrw-ja-work/
+
+# バックアップファイル
+*.bak
+*.bak-widget
+
+# ゴールデンテストの失敗出力 (差分画像)。基準画像 test/golden/goldens/ はコミットする
+test/golden/failures/
+
+# Claude Code のエージェント worktree (リポジトリ内に作られるが追跡しない)
+.claude/
+
+# Figma 反映の検証証跡 (全量はローカルのみ。代表分だけ追跡済み)
+docs/figma_type-scale-plus2_evidence/
+docs/figma_metric-units_evidence/
+docs/figma_wallpaper_evidence/
+
+# ---------------------------------------------------------------------------
+# 公開リポジトリに出さないもの（2026-10-21 追加）
+#
+# 上の「Android 署名」の節と同じ理由。**手元にしか無い値と、アカウントを
+# 指す値は置かない。** 消し忘れは1回で終わりにならない（履歴に残る）ので、
+# 名前で落とす。
+# ---------------------------------------------------------------------------
+
+# Firebase の構成ファイル。Google API キーと Firebase プロジェクト ID を含む。
+# アプリは**無くても通常起動する**（lib/data/push/firebase_push_runtime.dart の
+# グレースフル・デグラデーション。構成ファイルが無ければプッシュだけ無効）。
+# 自分の Firebase プロジェクトのものを置けばプッシュが有効になる。
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+firebase.json
+.firebaserc
+
+# Google Cloud のサービスアカウント鍵（秘密鍵そのもの）。
+# Play の API は tool/play_api.py が環境変数 PLAY_SA_JSON から読む。
+*-[0-9][0-9][0-9][0-9][0-9][0-9]-*.json
+service-account*.json
+
+# 手元の SDK の道・IDE の状態
+android/local.properties
+*.iml
+.idea/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/ephemeral/
+
+# CocoaPods の実体と Xcode の個人設定（利用者名がディレクトリ名に入る）
+ios/Pods/
+**/xcuserdata/
+*.xcuserstate
+
+# 編集の控え
+*.bak
+*.bak-*

@@ -1,0 +1,3 @@
+/* Textos del propósito de ubicación */
+"NSLocationWhenInUseUsageDescription" = "Mood-Ring Weather usa tu ubicación aproximada para mostrar el tiempo donde estás. No guardamos el historial de ubicaciones.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Mood-Ring Weather usa tu ubicación aproximada para mostrar el tiempo donde estás. No guardamos el historial de ubicaciones.";

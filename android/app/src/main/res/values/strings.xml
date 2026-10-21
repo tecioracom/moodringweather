@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 端末の壁紙の一覧・プレビューに出るライブ壁紙の名前 (サービスの label)。
+         アプリ内の案内「端末の壁紙設定から「Mood-Ring Weather」を選んでください」
+         (ARB settingsLiveWallpaperOpenFailed) と一致させる。1.3.0 (13) までは説明文
+         (wallpaper_description) を名前に使っており、一覧・プレビューの名前が日本語の
+         長い説明で途中で切れていた (2026-10-01 エミュレータで確認)。訳さない。 -->
+    <string name="wallpaper_label" translatable="false">Mood-Ring Weather</string>
+    <string name="wallpaper_author">Mood-Ring Weather</string>
+    <string name="wallpaper_description">MRI に応じて 5 状態の壁紙が自動で切り替わるライブ壁紙</string>
+</resources>

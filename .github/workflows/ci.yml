@@ -1,0 +1,56 @@
+# Mood-Ring Weather — PR CI
+# PR ごとに 静的解析 / テスト / フォーマット を検証するゲート。
+# ビルド(AAB/IPA)・署名・ストア入稿はここでは行わない(docs/release-setup.md 参照)。
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  flutter-checks:
+    name: analyze / test / format
+    # ubuntu-latest は 2026-10-19 から Ubuntu 26 に切り替わるため版を固定する。
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          # 手元 (macOS) と同じ版に固定する。未指定だと最新の stable になり、
+          # 描画や lint の差で手元と結果がずれる。
+          channel: stable
+          flutter-version: 3.44.1
+          cache: true
+
+      - name: Flutter version
+        run: flutter --version
+
+      - name: Install dependencies (gen-l10n も実行される)
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      # golden (保存画像との画素比較) は macOS で生成した基準画像と Linux の描画が
+      # 一致しないため除外する (dart_test.yaml の golden タグ)。golden は macOS の
+      # 手元で `flutter test --tags golden` を実行して確認する。
+      - name: Test
+        run: flutter test --exclude-tags golden
+
+      # 生成物 (lib/l10n/app_localizations*.dart など .gitignore 対象) を
+      # 巻き込まないよう、Git 管理下の .dart ファイルのみを対象にする
+      - name: Format check
+        run: |
+          files=$(git ls-files '*.dart')
+          if [ -n "$files" ]; then
+            dart format --set-exit-if-changed $files
+          fi

@@ -1,0 +1,67 @@
+rules_version = '2';
+
+// Mood-Ring Weather — Firestore セキュリティルール
+// docs/revenuecat-integration-plan.md §3.3 / §6、
+// docs/notification-delivery-design.md §4.2(push_subscriptions)。
+//
+// 原則:
+//   - ユーザーは自分の users/{uid} だけ読み書きできる (匿名 Auth の uid 一致)。
+//   - entitlement はサーバー (RevenueCat Webhook = サービスアカウント) のみが書く。
+//     サービスアカウント経由の書き込みはルールを**バイパス**するため、
+//     クライアントには read のみ許可し write は全面禁止にしてよい。
+//   - billingEvents (課金監査ログ) はクライアントから一切見えない/書けない。
+//   - push_subscriptions は本人のみ write。クライアント read は不要 (Workers は
+//     サービスアカウントで read)。緊急通知は常時 ON のため opt-out フィールドを
+//     持たせない (spec §12.2.1) — キー集合をルールで固定して構造的に禁止する。
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    match /users/{uid} {
+      // 本人のドキュメント (preferences / notificationToken など)
+      allow read, write: if isOwner(uid);
+
+      // エンタイトルメント: クライアントは read-only。書き込みは Webhook (Admin) のみ。
+      match /entitlement/{docId} {
+        allow read: if isOwner(uid);
+        // 書き込みは Workers (サービスアカウント) のみ。削除だけは本人に許可する —
+        // 「設定 → データを削除」(プライバシーポリシー §5、決裁 D3) のため。
+        // 消しても Plus を得られる方向の操作ではない (Webhook が再作成しうる)。
+        allow create, update: if false;
+        allow delete: if isOwner(uid);
+      }
+
+      // 課金監査ログ: サーバー専用 (クライアントは read/write 不可)。
+      match /billingEvents/{eventId} {
+        allow read, write: if false;
+      }
+    }
+
+    // 緊急プッシュ購読 (設計 §4.2)。1 ユーザー 1 ドキュメント、常に上書き (履歴非保持)。
+    //   fcmToken  : string   FCM 登録トークン (onTokenRefresh で upsert)
+    //   platform  : 'ios' | 'android'
+    //   locale    : string   BCP 47 ('ja' 等)。iOS フォールバック本文の言語選択用。省略可
+    //   lat, lon  : number   粗い座標 (クライアントで小数 1 桁 ≈ 10km に丸める。COARSE 方針)
+    //   updatedAt : timestamp  必ず FieldValue.serverTimestamp() で書く (90 日で失効掃除)
+    match /push_subscriptions/{uid} {
+      // 読み出しは Workers (サービスアカウント = ルール非適用) のみ。
+      allow read: if false;
+      allow delete: if isOwner(uid);
+      allow create, update: if isOwner(uid) && validPushSubscription(request.resource.data);
+    }
+
+    function validPushSubscription(d) {
+      return d.keys().hasOnly(['fcmToken', 'platform', 'locale', 'lat', 'lon', 'updatedAt'])
+        && d.keys().hasAll(['fcmToken', 'platform', 'lat', 'lon', 'updatedAt'])
+        && d.fcmToken is string && d.fcmToken.size() > 0 && d.fcmToken.size() <= 4096
+        && d.platform in ['ios', 'android']
+        && (!('locale' in d) || (d.locale is string && d.locale.size() > 0 && d.locale.size() <= 35))
+        && d.lat is number && d.lat >= -90 && d.lat <= 90
+        && d.lon is number && d.lon >= -180 && d.lon <= 180
+        && d.updatedAt is timestamp && d.updatedAt == request.time;
+    }
+  }
+}

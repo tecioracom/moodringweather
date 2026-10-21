@@ -1,0 +1,3 @@
+/* 位置情報の利用目的 (Info.plist の既定値と同じ) */
+"NSLocationWhenInUseUsageDescription" = "現在地の天気を表示するために位置情報を使用します。履歴は保存しません。";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "現在地の天気を表示するために位置情報を使用します。履歴は保存しません。";

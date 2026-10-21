@@ -1,0 +1,56 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mood_ring_weather/data/models/notification_preferences.dart';
+
+void main() {
+  group('NotificationPreferences', () {
+    test('初期値は緊急 + 天気変化 ON、パーソナル OFF', () {
+      final prefs = NotificationPreferences.initial();
+      expect(prefs.isOn(NotificationKind.heatStroke), isTrue);
+      expect(prefs.isOn(NotificationKind.storm), isTrue);
+      expect(prefs.isOn(NotificationKind.heavySnow), isTrue);
+      expect(prefs.isOn(NotificationKind.rainApproaching), isTrue);
+      expect(prefs.isOn(NotificationKind.mriSpike), isTrue);
+      expect(prefs.isOn(NotificationKind.pressureDrop), isFalse);
+      expect(prefs.isOn(NotificationKind.humiditySpike), isFalse);
+    });
+
+    test('toggle で個別に変更できる', () {
+      final prefs = NotificationPreferences.initial()
+          .toggle(NotificationKind.pressureDrop, true);
+      expect(prefs.isOn(NotificationKind.pressureDrop), isTrue);
+      // 他は変わらない
+      expect(prefs.isOn(NotificationKind.humiditySpike), isFalse);
+    });
+
+    test('JSON 往復で同じ値', () {
+      final original = NotificationPreferences.initial()
+          .toggle(NotificationKind.aqiBad, true)
+          .copyWith(quietStart: 23, quietEnd: 7, dailyLimit: 5);
+      final round = NotificationPreferences.fromJson(original.toJson());
+      expect(round.isOn(NotificationKind.aqiBad), isTrue);
+      expect(round.quietStart, 23);
+      expect(round.quietEnd, 7);
+      expect(round.dailyLimit, 5);
+    });
+
+    test('静音時間帯は緊急通知を素通しする', () {
+      final prefs = NotificationPreferences.initial()
+          .copyWith(quietStart: 22, quietEnd: 7);
+      final midnight = DateTime(2026, 5, 24, 2);
+      expect(prefs.isQuiet(midnight, NotificationKind.aqiBad), isTrue);
+      // 緊急は静音帯でも貫通
+      expect(prefs.isQuiet(midnight, NotificationKind.heatStroke), isFalse);
+    });
+
+    test('またぎ静音(23→7)が正しく判定される', () {
+      final prefs = NotificationPreferences.initial()
+          .copyWith(quietStart: 23, quietEnd: 7);
+      expect(prefs.isQuiet(DateTime(2026, 5, 24, 23, 30),
+          NotificationKind.aqiBad), isTrue);
+      expect(prefs.isQuiet(DateTime(2026, 5, 24, 6, 30),
+          NotificationKind.aqiBad), isTrue);
+      expect(prefs.isQuiet(DateTime(2026, 5, 24, 10),
+          NotificationKind.aqiBad), isFalse);
+    });
+  });
+}
